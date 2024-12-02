@@ -36,33 +36,33 @@ def safe_unsafe(report:list):
         else:
             return 'unsafe'
 
-
     for i, v in enumerate(report):
         #Skip the first index
         if i - 1 < 0:
             continue
         #Check if it breaks the increase or decrease rule
         if report[i-1] == v:
-            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i]+report[i+1:]) =='safe':
+            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:])=='safe'or check_again(report[1:]) or check_again(report[:-1])== 'safe':
                 return 'safe'
             else:
                 return 'unsafe'
         elif direction == 'i' and report[i-1] > v:
-            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i]+report[i+1:]) =='safe':
+            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:]) =='safe'or check_again(report[1:]) or check_again(report[:-1])== 'safe':
                 return 'safe'
             else:
                 return 'unsafe'
         elif direction == 'd' and report[i-1] < v:
-            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i]+report[i+1:]) =='safe':
+            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:]) =='safe' or check_again(report[1:]) == 'safe' or check_again(report[:-1])== 'safe':
                 return 'safe'
             else:
                 return 'unsafe'
         if abs(report[i-1] - v) > 3:
-            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:]) =='safe':
+            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:]) =='safe' or check_again(report[1:]) == 'safe' or check_again(report[:-1])== 'safe':
                 return 'safe'
             else:
                 return 'unsafe'
     return 'safe'
+
 
 
 def make_reports(file):
@@ -75,7 +75,7 @@ def make_reports(file):
 
 if __name__ == '__main__':
     count = 0
-    reports = make_reports('input.txt')
+    reports = make_reports('test.txt')
     with open('bad_reports.txt','w') as outfile:
 
         for report in reports:
