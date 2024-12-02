@@ -1,10 +1,14 @@
 def check_recs(reports:list):
 
     for report in reports:
+        # print(report)
+        # print(len(report))
         flag = ''
-        for i,n in enumerate(report):
+        for i, n in enumerate(report):
+            #Skip the first record
             if i == 0:
                 continue
+            #Set the increase or decrease flag
             if report[i] > report[i-1]:
                 flag = 'i'
             elif report[i] < report[i-1]:
@@ -20,7 +24,7 @@ def check_recs(reports:list):
                     break
             
             #If you get to the end 
-            if i == len(report)-1:
+            if i == len(report) - 1:
                 if flag == 'd' and report[i] < report[i-1]:
                     return 'safe'
                 if flag == 'i' and report[i] > report[i-1]:
@@ -39,6 +43,7 @@ def make_possibilities(report:list):
 
 
 def make_reports(file):
+    #Turn the lines of the input file into lists
     reports = []
     f = open(file).readlines()
     l = [x.replace('\n',' ') for x in f]
@@ -48,10 +53,11 @@ def make_reports(file):
 
 if __name__ == '__main__':
     count = 0
-    # x = [[49, 47, 46, 43, 41, 38, 35, 57]]
+    # x = make_possibilities([49, 47, 46, 43, 41, 38, 35, 57])
+
     # print(check_recs(x))
     with open('bad_reports.txt','w') as outfile:
-        for report in make_reports('test.txt'):
+        for report in make_reports('input.txt'):
             if check_recs(make_possibilities(report)) == 'safe':
                 count += 1
             else:
