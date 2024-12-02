@@ -15,7 +15,7 @@ def check_recs(reports:list):
                 flag = 'd'
             
             #If there is a step bigger than 3 move on to the next report
-            if abs(report[i] - report[i-1]) > 3:
+            if abs(report[i] - report[i-1]) > 3 or abs(report[i] - report[i-1]) == 0:
                 break
             if i < len(report) - 1:
                 if flag == 'i' and report[i] > report[i+1]:
@@ -54,13 +54,12 @@ def make_reports(file):
 if __name__ == '__main__':
     count = 0
     # x = make_possibilities([49, 47, 46, 43, 41, 38, 35, 57])
-
+    # print(len(x))
     # print(check_recs(x))
-    with open('bad_reports.txt','w') as outfile:
+    with open('bad_reports1.txt','w') as outfile:
         for report in make_reports('input.txt'):
             if check_recs(make_possibilities(report)) == 'safe':
                 count += 1
             else:
                 outfile.writelines(str(report)+'\n')
-        print(count)
-        #679 - not right
+       bad
