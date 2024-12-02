@@ -58,7 +58,7 @@ def safe_unsafe(report:list):
             else:
                 return 'unsafe'
         if abs(report[i-1] - v) > 3:
-            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i]+report[i+1:]) =='safe':
+            if check_again(report[:i]+report[i+1:])=='safe' or check_again(report[:i-1]+report[i:]) =='safe':
                 return 'safe'
             else:
                 return 'unsafe'
